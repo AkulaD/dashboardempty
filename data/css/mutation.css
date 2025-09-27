@@ -1,0 +1,19 @@
+#dataDate{
+    width: 100px;
+}
+
+#dataM{
+    width: 80px;
+    text-align: center;
+}
+
+.btnDownload{
+    padding: 8px 12px;
+    background-color: rgb(0, 123, 255);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    border-radius: 6px;
+}
