@@ -87,7 +87,7 @@ $result = $conn->query($sql);
                             <?php endwhile; ?>
                         <?php else: ?>
                             <tr>
-                                <td colspan="12" style="text-align:center;">No data available</td>
+                                <td colspan="14" style="text-align:center;">No data available</td>
                             </tr>
                         <?php endif; ?>
                     </tbody>
