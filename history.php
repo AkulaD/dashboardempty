@@ -1,10 +1,8 @@
 <?php
 include 'config.php';
 
-// --- Ambil tanggal dari input
 $selected_date = isset($_GET['date']) ? $_GET['date'] : date('Y-m-d');
 
-// --- Jika user pilih "all", tampilkan semua tanggal
 if ($selected_date === 'all') {
     $sql = "SELECT h.*, c.customer_name 
             FROM history h
