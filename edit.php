@@ -1,14 +1,12 @@
 <?php
-include "config.php"; // koneksi ke database
+include "config.php"; 
 
-// cek apakah ada id
 if (!isset($_GET['id'])) {
     die("ID tidak ditemukan!");
 }
 
-$id = intval($_GET['id']); // amankan id
+$id = intval($_GET['id']); 
 
-// Ambil data lama
 $sql = "SELECT s.*, c.customer_name, c.id as customer_id
         FROM shipments s
         JOIN customers c ON s.customer_id = c.id
@@ -21,7 +19,6 @@ if ($result->num_rows == 0) {
 
 $data = $result->fetch_assoc();
 
-// Proses update jika form dikirim
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $spx       = intval($_POST['spx']);
     $anter     = intval($_POST['anter']);
@@ -34,10 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $pos       = intval($_POST['pos']);
     $id_express= intval($_POST['id_express']);
 
-    // hitung total baru (untuk history, bukan untuk update shipments)
     $total = $spx + $anter + $sicepat + $jnt + $jne + $jnt_cargo + $jne_cargo + $lazada + $pos + $id_express;
 
-    // update shipments (tanpa kolom total karena itu generated column)
     $update = "UPDATE shipments SET
                 spx = $spx,
                 anter = $anter,
@@ -53,7 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($conn->query($update)) {
 
-        // tambahkan ke history (boleh isi total karena bukan generated column di history)
         $shipment_id = $id;
         $customer_id = $data['customer_id'];
         $sql_history = "INSERT INTO history
@@ -61,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             VALUES
             ($shipment_id, $customer_id, $spx, $anter, $sicepat, $jnt, $jne, $jnt_cargo, $jne_cargo, $lazada, $pos, $id_express, $total, 'Edit', NOW())";
 
-        $conn->query($sql_history); // jika error di history, tetap lanjut
+        $conn->query($sql_history); 
 
         echo "<script>alert('Data berhasil diupdate'); window.location='index.php';</script>";
     } else {

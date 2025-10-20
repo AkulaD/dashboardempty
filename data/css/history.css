@@ -1,9 +1,92 @@
-/* HISTORY */
-.dateH{
+.dateH {
     font-size: 1.2rem;
+    margin-top: 10px;
 }
 
-.headerH{
+.headerH {
     font-size: 1.5rem;
     margin-bottom: 10px;
+}
+
+.filter-box {
+    margin: 15px 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+}
+
+.filter-box label {
+    font-weight: 500;
+}
+
+.filter-box input[type="date"] {
+    padding: 6px 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.filter-box button {
+    padding: 7px 14px;
+    background-color: #4c5baf;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.filter-box button:hover {
+    background-color: #3a4a96;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.history-table th,
+.history-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.history-table th {
+    background-color: #4c5baf;
+    color: white;
+}
+
+.date-row {
+    background-color: #f5f5f5;
+    font-weight: bold;
+    text-align: left;
+}
+
+.time-col {
+    text-align: center;
+}
+
+.filter-box button {
+    padding: 7px 14px;
+    background-color: #4c5baf;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.filter-box button:hover {
+    background-color: #3a4a96;
+}
+
+.filter-box .all-btn {
+    background-color: #10b981;
+}
+
+.filter-box .all-btn:hover {
+    background-color: #059669;
 }

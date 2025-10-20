@@ -1,6 +1,7 @@
 <?php
 include 'config.php';
 
+// Ambil data POST
 $customer  = strtoupper(trim($_POST['customer'] ?? ''));
 $spx       = (int) ($_POST['spx'] ?? 0);
 $anter     = (int) ($_POST['anter'] ?? 0);
@@ -13,7 +14,7 @@ $lazada    = (int) ($_POST['lazada'] ?? 0);
 $pos       = (int) ($_POST['pos'] ?? 0);
 $id_express= (int) ($_POST['id_express'] ?? 0);
 
-// Pastikan customer ada
+// Cek customer sudah ada atau belum
 $sql_check = "SELECT id FROM customers WHERE customer_name = '$customer'";
 $result = $conn->query($sql_check);
 
@@ -30,7 +31,7 @@ if ($result->num_rows > 0) {
     }
 }
 
-// Cek apakah shipment untuk customer ini di hari ini sudah ada
+// Cek apakah customer ini sudah punya data hari ini
 $sql_exist = "SELECT id FROM shipments WHERE customer_id = $customer_id AND shipment_date = CURDATE()";
 $res_exist = $conn->query($sql_exist);
 
@@ -38,7 +39,7 @@ if ($res_exist->num_rows > 0) {
     $row = $res_exist->fetch_assoc();
     $shipment_id = $row['id'];
 
-    // UPDATE: tambahkan nilai
+    // UPDATE data lama
     $sql_update = "UPDATE shipments
                    SET spx = spx + $spx,
                        anter = anter + $anter,
@@ -53,7 +54,7 @@ if ($res_exist->num_rows > 0) {
                    WHERE id = $shipment_id";
     $conn->query($sql_update);
 
-    // Catat ke history
+    // Catat history
     $sql_history = "INSERT INTO history
     (shipment_id, customer_id, spx, anter, sicepat, jnt, jne, jnt_cargo, jne_cargo, lazada, pos, id_express, total, status, history_date)
     VALUES
@@ -81,6 +82,45 @@ if ($res_exist->num_rows > 0) {
     }
 }
 
-header("Location: index.php?success=1");
 $conn->close();
+
+echo <<<HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="1;url=index.php?success=1">
+    <style>
+        body {
+            margin: 0; padding: 0;
+            display: flex; align-items: center; justify-content: center;
+            height: 100vh; background: #f0f0f0; font-family: Arial, sans-serif;
+        }
+        .loading-overlay {
+            text-align: center;
+        }
+        .loader {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid blue;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 0.5s linear infinite;
+            margin: 0 auto 10px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        p { color: #555; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <div class="loading-overlay">
+        <div class="loader"></div>
+        <p>Menyimpan data, mohon tunggu...</p>
+    </div>
+</body>
+</html>
+HTML;
 ?>

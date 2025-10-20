@@ -16,61 +16,62 @@ include 'config.php';
             <a href="index.php">Home</a>
             <a href="history.php">History</a>
             <a href="mutation.php">Mutation</a>
-            <a href="setting.php">Settings</a>
+            <a href="chart.php">Chart</a>
         </nav>
     </header>
+
     <main>
         <section class="hero">
             <h1 id="header1">DASHBOARD</h1>
             <div class="add-item">
                 <button id="btn" onclick="openPopup()">Add Item</button>
             </div>
-            <!-- POP UP -->
+
+            <!-- POPUP -->
             <div class="overlay" id="popupOverlay">
                 <div class="popup">
-                <span class="close" onclick="closePopup()">&times;</span>
-                <h2>Tambah Item</h2>
-                <form action="tambah.php" method="POST">
-                    <label>Customer:</label>
-                    <input type="text" name="customer" placeholder="Masukkan nama" required>
+                    <span class="close" onclick="closePopup()">&times;</span>
+                    <h2>Tambah Item</h2>
+                    <form action="tambah.php" method="POST">
+                        <label>Customer:</label>
+                        <input type="text" name="customer" placeholder="Masukkan nama" required>
 
-                    <label>Spx:</label>
-                    <input type="number" name="spx" placeholder="Masukkan jumlah">
+                        <label>Spx:</label>
+                        <input type="number" name="spx" placeholder="Masukkan jumlah">
 
-                    <label>Anter:</label>
-                    <input type="number" name="anter" placeholder="Masukkan jumlah">
+                        <label>Anter:</label>
+                        <input type="number" name="anter" placeholder="Masukkan jumlah">
 
-                    <label>SiCepat:</label>
-                    <input type="number" name="sicepat" placeholder="Masukkan jumlah">
+                        <label>SiCepat:</label>
+                        <input type="number" name="sicepat" placeholder="Masukkan jumlah">
 
-                    <label>J&T:</label>
-                    <input type="number" name="jt" placeholder="Masukkan jumlah">
+                        <label>J&T:</label>
+                        <input type="number" name="jt" placeholder="Masukkan jumlah">
 
-                    <label>JNE:</label>
-                    <input type="number" name="jne" placeholder="Masukkan jumlah">
+                        <label>JNE:</label>
+                        <input type="number" name="jne" placeholder="Masukkan jumlah">
 
-                    <label>JNT Cargo:</label>
-                    <input type="number" name="jntcargo" placeholder="Masukkan jumlah">
+                        <label>JNT Cargo:</label>
+                        <input type="number" name="jntcargo" placeholder="Masukkan jumlah">
 
-                    <label>JNE Cargo:</label>
-                    <input type="number" name="jnecargo" placeholder="Masukkan jumlah">
+                        <label>JNE Cargo:</label>
+                        <input type="number" name="jnecargo" placeholder="Masukkan jumlah">
 
-                    <label>Lazada:</label>
-                    <input type="number" name="lazada" placeholder="Masukkan jumlah">
+                        <label>Lazada:</label>
+                        <input type="number" name="lazada" placeholder="Masukkan jumlah">
 
-                    <label>Pos:</label>
-                    <input type="number" name="pos" placeholder="Masukkan jumlah">
+                        <label>Pos:</label>
+                        <input type="number" name="pos" placeholder="Masukkan jumlah">
 
-                    <label>ID Express:</label>
-                    <input type="number" name="id_express" placeholder="Masukkan jumlah">
+                        <label>ID Express:</label>
+                        <input type="number" name="id_express" placeholder="Masukkan jumlah">
 
-                    <button type="submit">Simpan</button>
-                </form>
+                        <button type="submit">Simpan</button>
+                    </form>
                 </div>
             </div>
 
-            </div>
-            <!-- Empty -->
+            <!-- TABEL DATA -->
             <section>
                 <h2>Data Pengiriman</h2>
                 <table border="1" cellpadding="5" cellspacing="0">
@@ -94,7 +95,6 @@ include 'config.php';
                     </thead>
                     <tbody>
                         <?php
-                        // Query ambil data
                         $sql = "SELECT s.id, c.customer_name,
                                 s.spx, s.anter, s.sicepat,
                                 s.jnt, s.jne, s.jnt_cargo,
@@ -105,7 +105,6 @@ include 'config.php';
 
                         $result = $conn->query($sql);
 
-                        // cek error query
                         if (!$result) {
                             die("Query error: " . $conn->error);
                         }
@@ -135,7 +134,6 @@ include 'config.php';
                                     <td>
                                         <a href='edit.php?id=".$row['id']."'>Edit</a> |
                                         <a href='delete.php?id=".$row['id']."' onclick=\"return confirm('Yakin mau hapus data ini?');\">Delete</a>
-
                                     </td>
                                 </tr>";
 
@@ -153,7 +151,7 @@ include 'config.php';
                                 $totals['total']     += $row['total'];
                             }
                         } else {
-                            echo "<tr><td colspan='12' align='center'>Belum ada data</td></tr>";
+                            echo "<tr><td colspan='14' align='center'>Belum ada data</td></tr>";
                         }
                         ?>
                     </tbody>
@@ -178,5 +176,8 @@ include 'config.php';
             </section>
         </section>
     </main>
+    <footer>
+            <p style="font-size: 1.0rem; text-align: center; background-color: blue; color: white; padding: 2px;">&copy; Shaka Banuasta V2.0</p>
+    </footer>
 </body>
 </html>

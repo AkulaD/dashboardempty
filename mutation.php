@@ -1,5 +1,5 @@
 <?php
-include "config.php"; // koneksi ke database
+include "config.php";
 
 // Ambil data mutasi per hari
 $sql = "SELECT
@@ -39,7 +39,7 @@ $result = $conn->query($sql);
             <a href="index.php">Home</a>
             <a href="history.php">History</a>
             <a href="mutation.php">Mutation</a>
-            <a href="setting.php">Settings</a>
+            <a href="chart.php">Chart</a>
         </nav>
     </header>
     <main>
@@ -95,5 +95,8 @@ $result = $conn->query($sql);
             </div>
         </section>
     </main>
+    <footer>
+            <p style="font-size: 1.0rem; text-align: center; background-color: blue; color: white; padding: 2px;">&copy; Shaka Banuasta V2.0</p>
+    </footer>
 </body>
 </html>

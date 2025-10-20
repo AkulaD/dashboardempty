@@ -30,7 +30,6 @@ $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
 $sheet->setTitle('Mutation_'.$date);
 
-// Judul laporan (merge cell)
 $sheet->mergeCells('A1:M1');
 $sheet->setCellValue('A1', 'Mutation Report - '.$date);
 $sheet->getStyle('A1')->applyFromArray([
@@ -40,11 +39,9 @@ $sheet->getStyle('A1')->applyFromArray([
 ]);
 $sheet->getRowDimension('1')->setRowHeight(25);
 
-// Header tabel (row 2)
 $headers = ['No','Customer Name','Spx','Anter','Sicepat','J&T','JNE','JNT Cargo','JNE Cargo','Lazada','Pos','ID Express','Total'];
 $sheet->fromArray($headers, NULL, 'A2');
 
-// Styling header
 $sheet->getStyle('A2:M2')->applyFromArray([
     'font' => ['bold'=>true, 'color'=>['rgb'=>'FFFFFF']],
     'fill' => ['fillType'=>Fill::FILL_SOLID, 'startColor'=>['rgb'=>'4CAF50']],
@@ -56,7 +53,6 @@ $sheet->getRowDimension('2')->setRowHeight(20);
 $rowNumber = 3;
 $no = 1;
 
-// Inisialisasi total
 $totals = [
     'spx'=>0, 'anter'=>0, 'sicepat'=>0, 'jnt'=>0, 'jne'=>0,
     'jnt_cargo'=>0, 'jne_cargo'=>0, 'lazada'=>0, 'pos'=>0, 'id_express'=>0, 'total'=>0
@@ -77,13 +73,10 @@ while($row = $result->fetch_assoc()){
           ->setCellValue('L'.$rowNumber, $row['id_express'])
           ->setCellValue('M'.$rowNumber, $row['total']);
 
-    // Border tiap baris
     $sheet->getStyle("A{$rowNumber}:M{$rowNumber}")->applyFromArray([
         'borders' => ['allBorders'=>['borderStyle'=>Border::BORDER_THIN]]
     ]);
 
-    // Alignment: nama kiri, angka center
-    // -> perbaikan: panggil getStyle terpisah untuk sel yang bukan range dengan koma
     $sheet->getStyle("B{$rowNumber}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
     $sheet->getStyle("A{$rowNumber}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
     $sheet->getStyle("C{$rowNumber}:M{$rowNumber}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
@@ -105,7 +98,6 @@ while($row = $result->fetch_assoc()){
     $no++;
 }
 
-// Tulis footer total
 $sheet->setCellValue('B'.$rowNumber, 'TOTAL')
       ->setCellValue('C'.$rowNumber, $totals['spx'])
       ->setCellValue('D'.$rowNumber, $totals['anter'])
@@ -119,7 +111,6 @@ $sheet->setCellValue('B'.$rowNumber, 'TOTAL')
       ->setCellValue('L'.$rowNumber, $totals['id_express'])
       ->setCellValue('M'.$rowNumber, $totals['total']);
 
-// Styling footer total (semua biru dulu)
 $sheet->getStyle("A{$rowNumber}:M{$rowNumber}")->applyFromArray([
     'font' => ['bold'=>true, 'color'=>['rgb'=>'FFFFFF']],
     'fill' => ['fillType'=>Fill::FILL_SOLID, 'startColor'=>['rgb'=>'2196F3']],
@@ -127,20 +118,16 @@ $sheet->getStyle("A{$rowNumber}:M{$rowNumber}")->applyFromArray([
     'borders' => ['allBorders'=>['borderStyle'=>Border::BORDER_THIN]]
 ]);
 
-// Kolom Total All (M) diberi warna oranye (override)
 $sheet->getStyle("M{$rowNumber}")->getFill()->setFillType(Fill::FILL_SOLID)
       ->getStartColor()->setRGB('FF9800');
 
-// Auto size kolom A–M
 foreach(range('A','M') as $col){
     $sheet->getColumnDimension($col)->setAutoSize(true);
 }
 
-// AutoFilter & Freeze Header
 $sheet->setAutoFilter("A2:M2");
 $sheet->freezePane('A3');
 
-// Nama file
 $tanggalMutasi = date('d-m-Y', strtotime($date));
 
 $filename = "mutasi_empty_" . $tanggalMutasi . ".xlsx";
