@@ -29,7 +29,7 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mutation</title>
-    <link rel="stylesheet" href="data/css/style.css">
+    <link rel="stylesheet" href="data/css/my.css">
     <link rel="stylesheet" href="data/css/mutation.css">
     <script src="data/js/script.js" defer></script>
 </head>
@@ -96,7 +96,7 @@ $result = $conn->query($sql);
         </section>
     </main>
     <footer>
-            <p style="font-size: 1.0rem; text-align: center; background-color: blue; color: white; padding: 2px;">&copy; Shaka Banuasta V2.0</p>
+        <p>&copy; Shaka Banuasta V2.0</p>
     </footer>
 </body>
 </html>

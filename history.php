@@ -31,8 +31,8 @@ $result = $stmt->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>History</title>
-    <link rel="stylesheet" href="data/css/style.css">
-    <link rel="stylesheet" href="data/css/history.css">
+    <link rel="stylesheet" href="data/css/my.css">
+    <link rel="stylesheet" href="data/css/historyempty.css">
 </head>
 <body>
 <header>
@@ -53,7 +53,7 @@ $result = $stmt->get_result();
                 <label for="date">Pilih tanggal:</label>
                 <input type="date" name="date" id="date"
                     value="<?php echo ($selected_date !== 'all') ? $selected_date : ''; ?>">
-                <button type="submit">Tampilkan</button>
+                <button type="submit" class="all-btn">Tampilkan</button>
                 <button type="submit" name="date" value="all" class="all-btn">Semua Tanggal</button>
             </form>
         </div>
@@ -134,7 +134,6 @@ $result = $stmt->get_result();
     </section>
 </main>
 <footer>
-    <p style="font-size: 1.0rem; text-align: center; background-color: blue; color: white; padding: 2px;">&copy; Shaka Banuasta V2.0</p>
-</footer>
+    <p>&copy; Shaka Banuasta V2.0</p></footer>
 </body>
 </html>

@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
-<link rel="stylesheet" href="data/css/style.css">
+<link rel="stylesheet" href="data/css/my.css">
 <link rel="stylesheet" href="data/css/edit.css">
 
 <main>

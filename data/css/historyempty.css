@@ -69,24 +69,3 @@
     text-align: center;
 }
 
-.filter-box button {
-    padding: 7px 14px;
-    background-color: #4c5baf;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
-
-.filter-box button:hover {
-    background-color: #3a4a96;
-}
-
-.filter-box .all-btn {
-    background-color: #10b981;
-}
-
-.filter-box .all-btn:hover {
-    background-color: #059669;
-}
