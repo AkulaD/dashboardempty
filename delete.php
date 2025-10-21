@@ -11,6 +11,7 @@ if (!isset($_GET['id'])) {
 
 $id = intval($_GET['id']);
 
+// Cek apakah data ada
 $sql = "SELECT * FROM shipments WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $id);
@@ -21,3 +22,19 @@ $shipment = $result->fetch_assoc();
 if (!$shipment) {
     die("Data tidak ditemukan!");
 }
+
+// Hapus data dari tabel shipments
+$sql_delete = "DELETE FROM shipments WHERE id = ?";
+$stmt_delete = $conn->prepare($sql_delete);
+$stmt_delete->bind_param("i", $id);
+$stmt_delete->execute();
+
+// Opsional: hapus juga dari tabel history (jika ingin bersih)
+$sql_history = "DELETE FROM history WHERE shipment_id = ?";
+$stmt_history = $conn->prepare($sql_history);
+$stmt_history->bind_param("i", $id);
+$stmt_history->execute();
+
+header("Location: index.php");
+exit;
+?>
