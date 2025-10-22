@@ -74,7 +74,7 @@ while ($row = $result->fetch_assoc()) {
         </script>
     </main>
     <footer>
-            <p>&copy; Shaka Banuasta V2.0</p>
+            <p>&copy; Shaka Banuasta  <?php echo $versionWeb ?></p>
     </footer>
 </body>
 </html>
