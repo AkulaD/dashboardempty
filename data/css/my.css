@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -37,13 +37,13 @@
     color: #333;
 }
 
-header{
+header {
     background-color: #4c5baf;
     color: white;
     padding: 10px 0;
 }
 
-nav{
+nav {
     display: flex;
     justify-content: flex-end;
     gap: 20px;
@@ -52,55 +52,55 @@ nav{
     margin: 15px auto;
 }
 
-nav a{
+nav a {
     color: white;
     text-decoration: none;
     font-size: 1.2rem;
     transition: font-size 0.3s;
 }
 
-nav a:hover{
+nav a:hover {
     background-color: blue;
     font-size: 1.3rem;
     padding: 5px 5px;
     border-radius: 10px;
 }
 
-main{
+main {
     max-width: 2000px;
     margin: 0 auto;
     padding: 50px 15px;
     min-height: 100vh;
 }
 
-footer{
+footer {
     background-color: #4c5baf;
     color: white;
     text-align: center;
     padding: 10px 0;
 }
 
-#header1, #date{
-    margin-top:20px;
+#header1, #date {
+    margin-top: 20px;
 }
 
-h1{
+h1 {
     font-size: 1.6rem;
 }
 
-#date{
+#date {
     font-size: 1rem;
     color: rgb(49, 49, 49);
     margin-bottom: 10px;
 }
 
-.add-item{
+.add-item {
     width: 100%;
     display: flex;
     justify-content: flex-end;
 }
 
-.add-item button{
+.add-item button {
     padding: 10px;
     background-color: blue;
     color: white;
@@ -161,7 +161,6 @@ tfoot td {
     text-align: center;
 }
 
-/* Pop up */
 .overlay {
     display: none;
     position: fixed;
@@ -181,6 +180,7 @@ tfoot td {
     overflow-y: auto;
     box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     animation: fadeIn 0.3s ease;
+    border-radius: 10px;
 }
 
 @keyframes fadeIn {
@@ -212,13 +212,14 @@ tfoot td {
     font-size: 1rem;
     transition: border 0.3s;
 }
-    
+
 .popup input:focus {
     border-color: #2563eb;
     outline: none;
 }
 
-.popup button[type="submit"], .popup button[type="button"] {
+.popup button[type="submit"], 
+.popup button[type="button"] {
     background: #2563eb;
     color: white;
     border: none;
@@ -230,22 +231,17 @@ tfoot td {
     cursor: pointer;
     transition: background 0.3s ease;
 }
-    
+
 .popup button[type="submit"]:hover {
     background: #1e40af;
 }
 
 .popup button[type="button"] {
     background: #ef4444;
-    color: white;
-    border: none;
-    padding: 10px;
-    margin-top: 10px;
-    width: 100%;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
+}
+
+.popup button[type="button"]:hover {
+    background: #dc2626;
 }
 
 .close {

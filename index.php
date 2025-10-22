@@ -24,10 +24,9 @@ include 'config.php';
         <section class="hero">
             <h1 id="header1">DASHBOARD</h1>
             <div class="add-item">
-                <button id="btn" onclick="openPopup()">Add Item</button>
+                <button onclick="openPopup()">Add Item</button>
             </div>
 
-            <!-- POPUP -->
             <div class="overlay" id="popupOverlay">
                 <div class="popup">
                     <span class="close" onclick="closePopup()">&times;</span>
@@ -35,43 +34,32 @@ include 'config.php';
                     <form action="tambah.php" method="POST">
                         <label>Customer:</label>
                         <input type="text" name="customer" placeholder="Masukkan nama" required>
-
                         <label>Spx:</label>
                         <input type="number" name="spx" placeholder="Masukkan jumlah">
-
                         <label>Anter:</label>
                         <input type="number" name="anter" placeholder="Masukkan jumlah">
-
                         <label>SiCepat:</label>
                         <input type="number" name="sicepat" placeholder="Masukkan jumlah">
-
                         <label>J&T:</label>
                         <input type="number" name="jt" placeholder="Masukkan jumlah">
-
                         <label>JNE:</label>
                         <input type="number" name="jne" placeholder="Masukkan jumlah">
-
                         <label>JNT Cargo:</label>
                         <input type="number" name="jntcargo" placeholder="Masukkan jumlah">
-
                         <label>JNE Cargo:</label>
                         <input type="number" name="jnecargo" placeholder="Masukkan jumlah">
-
                         <label>Lazada:</label>
                         <input type="number" name="lazada" placeholder="Masukkan jumlah">
-
                         <label>Pos:</label>
                         <input type="number" name="pos" placeholder="Masukkan jumlah">
-
                         <label>ID Express:</label>
                         <input type="number" name="id_express" placeholder="Masukkan jumlah">
-
                         <button type="submit">Simpan</button>
+                        <button type="button" onclick="closePopup()">Batal</button>
                     </form>
                 </div>
             </div>
 
-            <!-- TABEL DATA -->
             <section>
                 <h2>Data Pengiriman</h2>
                 <table border="1" cellpadding="5" cellspacing="0">
@@ -102,19 +90,13 @@ include 'config.php';
                                 FROM shipments s
                                 JOIN customers c ON s.customer_id = c.id
                                 WHERE s.shipment_date = CURDATE()";
-
                         $result = $conn->query($sql);
-
-                        if (!$result) {
-                            die("Query error: " . $conn->error);
-                        }
-
+                        if (!$result) die("Query error: " . $conn->error);
                         $no = 1;
                         $totals = [
                             "spx"=>0, "anter"=>0, "sicepat"=>0, "jnt"=>0, "jne"=>0,
                             "jnt_cargo"=>0, "jne_cargo"=>0, "lazada"=>0, "pos"=>0, "id_express"=>0, "total"=>0
                         ];
-
                         if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc()){
                                 echo "<tr>
@@ -136,19 +118,17 @@ include 'config.php';
                                         <a href='delete.php?id=".$row['id']."' onclick=\"return confirm('Yakin mau hapus data ini?');\">Delete</a>
                                     </td>
                                 </tr>";
-
-                                // hitung total
-                                $totals['spx']       += $row['spx'];
-                                $totals['anter']     += $row['anter'];
-                                $totals['sicepat']   += $row['sicepat'];
-                                $totals['jnt']       += $row['jnt'];
-                                $totals['jne']       += $row['jne'];
+                                $totals['spx'] += $row['spx'];
+                                $totals['anter'] += $row['anter'];
+                                $totals['sicepat'] += $row['sicepat'];
+                                $totals['jnt'] += $row['jnt'];
+                                $totals['jne'] += $row['jne'];
                                 $totals['jnt_cargo'] += $row['jnt_cargo'];
                                 $totals['jne_cargo'] += $row['jne_cargo'];
-                                $totals['lazada']    += $row['lazada'];
-                                $totals['pos']       += $row['pos'];
-                                $totals['id_express']+= $row['id_express'];
-                                $totals['total']     += $row['total'];
+                                $totals['lazada'] += $row['lazada'];
+                                $totals['pos'] += $row['pos'];
+                                $totals['id_express'] += $row['id_express'];
+                                $totals['total'] += $row['total'];
                             }
                         } else {
                             echo "<tr><td colspan='14' align='center'>Belum ada data</td></tr>";
@@ -176,6 +156,12 @@ include 'config.php';
             </section>
         </section>
     </main>
+
+    <div class="loading-overlay" id="loadingScreen">
+        <div class="loader"></div>
+        <p>Loading...</p>
+    </div>
+
     <footer>
         <p>&copy; Shaka Banuasta V2.0</p>
     </footer>

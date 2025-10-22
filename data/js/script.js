@@ -1,13 +1,7 @@
 function openPopup() {
     document.getElementById("popupOverlay").style.display = "flex";
 }
-function closePopup() {
-    document.getElementById("popupOverlay").style.display = "none";
-}
 
-function openPopup() {
-    document.getElementById("popupOverlay").style.display = "block";
-}
 function closePopup() {
     document.getElementById("popupOverlay").style.display = "none";
 }
@@ -19,9 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (form && loadingScreen) {
         form.addEventListener("submit", function(e) {
             e.preventDefault();
-
             loadingScreen.style.display = "flex";
-
             setTimeout(() => {
                 form.submit();
             }, 300);
