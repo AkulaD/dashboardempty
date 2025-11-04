@@ -10,5 +10,5 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$versionWeb = "V2.3";
+$versionWeb = "V2.4";
 ?>
